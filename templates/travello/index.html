@@ -1,5 +1,5 @@
 {% load static %}
- 
+ {% static "images" as baseUrl%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -276,8 +276,8 @@
 						{% for destnation in destinations %}
 						<div class="destination item">
 							<div class="destination_image">
-								<img src="{{destnation.img}}" alt="">
-								{% if destnation.price > 39000 %}
+								<img src="{{destnation.img.url}}" alt="">
+								{% if destnation.price >= 65000 %}
 								<div class="spec_offer text-center"><a href="#">Special Offer</a></div>
 								{% endif %}
 							</div>
