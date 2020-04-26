@@ -1,0 +1,18 @@
+{% extends 'clac/base.html' %}
+
+    {% block content %}
+    <form action = "add" method="POST">
+
+      {% csrf_token %}
+        <div class="form-group" style="width: 20%;">
+          <label for="exampleFormControlInput1">1st Number:</label>
+          <input type="text" class="form-control" name = "num1" id="exampleFormControlInput1" placeholder="45532">
+        </div>
+        <div class="form-group" style="width: 20%;">
+            <label for="exampleFormControlInput1"> 2nd Number:</label>
+            <input type="text" class="form-control" name = "num2" id="exampleFormControlInput1" placeholder="645632">
+          </div>
+          <button type="submit" class="btn btn-primary">ADD</button>
+    </form> 
+    The Result is {{result}}
+    {% endblock %}
