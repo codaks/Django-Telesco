@@ -4,6 +4,24 @@ from django.contrib import messages
 
 # Create your views here.
 
+def login(request):
+        if request.method=='POST':
+            username = request.POST['usr']
+            password = request.POST['password']
+            try:
+                user = users.objects.get(username=username,password=password)
+                if user is not None:
+                    return redirect("/home")
+                else:
+                    messages.info(request,"Invalid User Name or Password")
+                    return redirect("login")
+            except users.DoesNotExist:
+                user = None
+                messages.info(request,"Invalid User Name or Password")
+                return redirect("login")
+        elif request.method=='GET':
+            return render (request,'accounts/login.html')
+
 def register(request):
     if request.method == 'POST':
         user = request.POST['usr']
@@ -45,3 +63,6 @@ def register(request):
 
         print("Object Inserted")
     return render(request,'accounts/register.html')
+
+
+    
