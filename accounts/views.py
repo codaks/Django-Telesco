@@ -45,10 +45,10 @@ def register(request):
             messages.info(request,'Email Already Taken')
             return redirect('register')
             
-        if users.objects.filter(user=user).exists():
+        if users.objects.filter(username=user).exists():
             messages.info(request,'Username Already Taken')
             return redirect('register')
-        if zip_code.length !=6:
+        if len(zip_code) !=6:
             messages.info(request,'Invalid zipcode')
             return redirect('register')
 
