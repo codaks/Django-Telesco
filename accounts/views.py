@@ -11,6 +11,7 @@ def login(request):
             try:
                 user = users.objects.get(username=username,password=password)
                 if user is not None:
+                    request.session['username'] = username
                     return redirect("/home")
                 else:
                     messages.info(request,"Invalid User Name or Password")
@@ -19,6 +20,7 @@ def login(request):
                 user = None
                 messages.info(request,"Invalid User Name or Password")
                 return redirect("login")
+                
         elif request.method=='GET':
             return render (request,'accounts/login.html')
 
@@ -62,7 +64,14 @@ def register(request):
         return redirect('/home')
 
         print("Object Inserted")
-    return render(request,'accounts/register.html')
+
+
+    if request.method == 'GET':
+        return render(request,'accounts/register.html')
+
+def logout(request):
+        del request.session['username']
+        return redirect('login')
 
 
     

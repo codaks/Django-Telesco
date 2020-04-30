@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Destinations
 # Create your views here.
@@ -6,5 +6,7 @@ from .models import Destinations
 def index(request):
     destinations = Destinations.objects.all()
 
-
-    return render(request,'travello/index.html', {'destinations':destinations})
+    if request.session.has_key('username'):
+        return render(request,'travello/index.html', {'destinations':destinations})
+    else:
+        return redirect('/accounts/login')
